@@ -1,0 +1,115 @@
+PRACTICA FINAL REACT 
+
+Vamos a realizar una aplicación que consumirá un Web Api. 
+Dicha aplicación creará apuestas para una porra del clásico de octubre 
+El diseño se realizará con Bootstrap. 
+La URL del servicio Api es la siguiente: 
+https://apiejemplos.azurewebsites.net/ 
+
+Tendremos dos métodos GET: 
+Devolverá la descripción de los equipos del partido 
+Devolverá las apuestas realizadas 
+
+Existe un método POST para insertar apuestas alojado en: 
+
+También tenemos un método para eliminar Apuestas por su ID: 
+
+Tendremos que enviar al servicio un objeto Apuesta en formato JSON compuesto por IdApuesta, Usuario, Resultado y fecha. 
+
+Nota: El IdApuesta no importa ya que el servicio Api genera el máximo valor, pero SI que debe estar incluido en el objeto, lo que no importa es el valor. El formato del resultado y contenido no importa, es un String 
+
+PAGINA PRINCIPAL 
+Mostraremos un menú con los equipos del servicio 
+
+DETALLES EQUIPO 
+Podremos ver el detalle de un equipo determinado y visualizar sus jugadores. 
+
+PAGINA JUGADORES POR EQUIPO 
+Visualizaremos los jugadores por su equipo. 
+Podremos ir a los detalles de un jugador. 
+
+PAGINA DETALLES DE JUGADOR 
+Visualizaremos los detalles de un jugador determinado  
+
+PAGINA APUESTAS 
+Visualizaremos las apuestas realizadas  
+
+PAGINA INSERTAR APUESTA 
+Realizaremos la inserción de una nueva apuesta e iremos de nuevo a la página de Apuestas. 
+ 
+
+MINI PRACTICA DE REACT 
+Podremos buscar jugadores por Nombre 
+Podremos buscar jugadores por Equipo 
+
+Al iniciar el component, tendremos los equipos en un <select> 
+
+Tendremos dos components. 
+
+El component Buscador que tendrá los equipos en un select y el buscador de nombres 
+El component Jugadores que mostrara la tabla de jugadores 
+
+Como he regalado muchos 10, esto es un 8 
+
+Para el 10: La búsqueda de los jugadores estará en el component de Jugadores. 
+
+Consejo: Debéis tener en cuenta que podemos enviar props opcionales al component  
+De Jugadores y capturar en Mount qué props viene con un simple IF…. 
+
+<Jugadores idequipo="1"/> 
+O 
+<Jugadores nombre="a"/> 
+
+EJEMPLO DE TABLA 
+
+        <table className='table table-info'> 
+
+            <thead> 
+
+                <tr> 
+
+                    <th>Imagen</th> 
+
+                    <th>Nombre</th> 
+
+                    <th>Posición</th> 
+
+                    <th>Pais</th> 
+
+                </tr> 
+
+            </thead> 
+
+            <tbody> 
+
+                 
+
+            </tbody> 
+
+        </table> 
+
+
+!! COMPONENTS
+- Home
+- Menu
+- Apuestas
+- InsertarApuesta
+- DetallesEquipo
+- JugadoresEquipo
+- DetallesJugador
+
+!! SERVICIOS
+- Apuestas
+- Equipos
+- Jugadores
+
+!! MÉTODOS
+~ getAllTeams()
+~ getTeamById()
+~ getJugadoresEquipo()
+~ getApuestas()
+~ insertApuesta()
+~ deleteApuestaById()
+- getDetallesJugador()
+- findJugadoresByNombre() (todos los jugadores que coincidan)
+- findJugadoresByEquipo()
