@@ -70,3 +70,81 @@ export default class JugadoresComponent extends Component {
         )
     }
 }
+
+/** Para poner un nombre y si se elije un equipo, acota la búsqueda a los jugadores con ese nombre y ese equipo
+ * (También mirar BuscadorComponent)
+
+import React, { Component } from 'react'
+import JugadoresService from '../service/JugadoresService'
+
+export default class JugadoresComponent extends Component {
+
+    service = new JugadoresService();
+
+    state = {
+        jugadores: []
+    }
+
+    searchJugadoresByName = async () => {
+        let datos = await this.service.searchJugadoresByName(this.props.nombre);
+        if (this.props.idEquipo != -1) {
+            datos = datos.filter(j => j.idEquipo == this.props.idEquipo);
+        }
+        this.setState({
+            jugadores: datos
+        })
+    }
+
+    searchJugadoresByTeam = async () => {
+        let datos = await this.service.searchJugadoresByTeam(this.props.idEquipo);
+        this.setState({
+            jugadores: datos
+        })
+    }
+
+    searchJugadores = async () => {
+        if (this.props.nombre) {
+            await this.searchJugadoresByName();
+        } else if (this.props.idEquipo != -1) {
+            await this.searchJugadoresByTeam();
+        }
+    }
+
+    componentDidMount = async () => {
+        await this.searchJugadores();
+    }
+
+    componentDidUpdate = async (oldProps) => {
+        if (oldProps.nombre != this.props.nombre || oldProps.idEquipo != this.props.idEquipo) {
+            await this.searchJugadores();
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Posición</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.jugadores.map((jug) => {
+                                return (<tr key={jug.idJugador}>
+                                    <td><img src={jug.imagen} height="60px" alt={jug.nombre} /></td>
+                                    <td>{jug.nombre}</td>
+                                    <td>{jug.posicion}</td>
+                                </tr>)
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+}
+ */

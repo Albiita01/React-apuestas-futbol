@@ -78,3 +78,78 @@ export default class BuscadorComponent extends Component {
         )
     }
 }
+
+/** Para poner un nombre y si se elije un equipo, acota la búsqueda a los jugadores con ese nombre y ese equipo
+ * (También mirar JugadoresComponent)
+
+import React, { Component } from 'react'
+import EquiposService from '../service/EquiposService'
+import JugadoresComponent from './JugadoresComponent';
+
+export default class BuscadorComponent extends Component {
+
+    service = new EquiposService();
+
+    cajaNombre = React.createRef();
+    selectEquipo = React.createRef();
+
+    state = {
+        equipos: [],
+        idEquipo: -1,
+        nombre: ""
+    }
+
+    loadEquiposSelect = async () => {
+        let datos = await this.service.getAllTeams();
+        this.setState({
+            equipos: datos
+        })
+    }
+
+    searchByName = (event) => {
+        event.preventDefault();
+        this.setState({
+            nombre: this.cajaNombre.current.value.trim()
+        })
+    }
+
+    filterByTeam = () => {
+        this.setState({
+            idEquipo: this.selectEquipo.current.value
+        })
+    }
+
+    componentDidMount = async () => {
+        await this.loadEquiposSelect();
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Buscador de jugadores</h1>
+                <form onSubmit={this.searchByName}>
+                    <label>Nombre del jugador:</label>
+                    <input type='text' ref={this.cajaNombre} className='form-control' />
+                    <button className='btn btn-primary'>Buscar jugadores</button>
+                </form>
+                <br />
+
+                <label>Filtrar por equipo:</label>
+                <select ref={this.selectEquipo} onChange={this.filterByTeam} className='form-control'>
+                    <option value={-1}>Todos los equipos</option>
+                    {
+                        this.state.equipos.map((eq) => {
+                            return (<option value={eq.idEquipo} key={eq.idEquipo}>{eq.nombre}</option>)
+                        })
+                    }
+                </select>
+
+                {
+                    (this.state.nombre || this.state.idEquipo != -1) &&
+                    <JugadoresComponent nombre={this.state.nombre} idEquipo={this.state.idEquipo} />
+                }
+            </div>
+        )
+    }
+}
+ */
