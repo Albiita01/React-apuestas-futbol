@@ -7,6 +7,8 @@ import DetallesEquipoComponent from './components/DetallesEquipoComponent'
 import JugadorEquipoComponent from './components/JugadoresEquipoComponent'
 import JugadoresEquipoComponent from './components/JugadoresEquipoComponent'
 import InsertApuesta from './components/InsertApuesta'
+import DetallesJugadorComponent from './components/DetallesJugadorComponent'
+import BuscadorComponent from './components/BuscadorComponent'
 
 export default class Router extends Component {
 
@@ -24,6 +26,11 @@ export default class Router extends Component {
             return (<JugadoresEquipoComponent idTeam={id} />)
         }
 
+        function SearchJugadorByIdElement() {
+            let { id } = useParams();
+            return (<DetallesJugadorComponent idJugador={id} />)
+        }
+
         return (
             <BrowserRouter>
                 <MenuComponent />
@@ -33,6 +40,8 @@ export default class Router extends Component {
                     <Route path='/equipos/:id' element={<SearchTeamByIdElement />} />
                     <Route path='/jugadores/jugadoresEquipo/:id' element={<SearchJugadoresPorEquipoElement />} />
                     <Route path='/nueva-apuesta' element={<InsertApuesta />} />
+                    <Route path='/jugadores/:id' element={<SearchJugadorByIdElement />} />
+                    <Route path='/buscador' element={<BuscadorComponent />} />
                 </Routes>
             </BrowserRouter>
         )

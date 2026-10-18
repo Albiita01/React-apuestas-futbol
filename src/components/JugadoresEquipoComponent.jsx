@@ -27,10 +27,17 @@ export default class JugadoresEquipoComponent extends Component {
         console.log("Jugadores: " + datos)
     }
 
-
     componentDidMount = async () => {
         await this.loadJugadoresByTeam(this.props.idTeam);
     }
+
+    /* Así sería el componentDidUpdate()
+    componentDidUpdate = async (oldProps) => {
+        if (oldProps.idTeam !== this.props.idTeam) {
+            await this.loadJugadoresByTeam(this.props.idTeam);
+        }
+    }
+    */
 
     render() {
         return (
@@ -58,7 +65,7 @@ export default class JugadoresEquipoComponent extends Component {
                                                 <td>{jug.nombre}</td>
                                                 <td>{jug.posicion}</td>
                                                 <td>
-                                                    <NavLink className="btn btn-primary">Detalles</NavLink>
+                                                    <NavLink to={"/jugadores/" + jug.idJugador} className="btn btn-primary">Detalles</NavLink>
                                                 </td>
                                             </tr>)
                                         })
